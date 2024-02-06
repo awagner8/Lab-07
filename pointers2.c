@@ -17,8 +17,12 @@
  */
 
 char* stringcat(char* str1, char* str2) {
-    // TODO: Implement this function.
-    return NULL;
+    int len1 = strlen(str1);
+    int len2 = strlen(str2);
+    char* result = malloc(len1 + len2 + 1);
+    strcpy(result, str1);
+    strcpy(result + len1, str2);
+    return result;
 }
 
 /**
@@ -81,9 +85,17 @@ void free_list(struct ll_node* head) {
  */
 
 int sum_linked_list(struct ll_node* head) {
-    // TODO: Implement this function.
-    return 2;
+    int sum = 0;
+    struct ll_node* current = head;
+    
+    while (current != NULL) {
+        sum += current->val;
+        current = current->next;
+    }
+    
+    return sum;
 }
+
 
 void test_sum_linked_list(CuTest *tc) {
 
@@ -121,8 +133,43 @@ void test_sum_linked_list(CuTest *tc) {
  */
 
 int linked_list_equality(struct ll_node* head1, struct ll_node* head2) {
-    // TODO: Implement the function
-    return 2;
+    struct ll_node* current1 = head1;
+    struct ll_node* current2 = head2;
+    int length1 = 0;
+    int length2 = 0;
+    while (current1 != NULL) {
+        length1++;
+        current1 = current1->next;
+    }
+    while (current2 != NULL) {
+        length2++;
+        current2 = current2->next;
+    }
+    current1 = head1;
+    current2 = head2;
+    if (length1 != length2) {
+        return 0;
+    }
+    while(current1 != NULL && current2 != NULL) {
+        if (current1->val != current2->val) {
+            return 0;
+        }
+        current1 = current1->next;
+        current2 = current2->next;
+    }
+    if (head1 == head2) {
+        return 3;
+    }
+    current1 = head1;
+    current2 = head2;
+    while (current1 != NULL) {
+        if (current1 == current2) {
+            return 2;
+        }
+        current1 = current1->next;
+        current2 = current2->next;
+    }
+    return 1;
 }
 
 void test_linked_list_equality(CuTest *tc) {
