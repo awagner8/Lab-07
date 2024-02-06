@@ -1,0 +1,10 @@
+pointers2 
+results.json
+prelab_questions.md
+*_handout/
+__pycache__/
+*.pyc
+tests/*_actual*
+tests/*_diff*
+autograder/*.zip
+vgcore*
