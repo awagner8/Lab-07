@@ -17,11 +17,16 @@
  */
 
 char* stringcat(char* str1, char* str2) {
-    int len1 = strlen(str1);
-    int len2 = strlen(str2);
-    char* result = malloc(len1 + len2 + 1);
+    // Calculate the total length needed for the concatenated string
+    size_t len1 = strlen(str1);
+    size_t len2 = strlen(str2);
+    size_t totalLen = len1 + len2;
+    char* result = (char*)malloc((totalLen + 1) * sizeof(char));
+
     strcpy(result, str1);
-    strcpy(result + len1, str2);
+    strcat(result, str2);
+    
+
     return result;
 }
 
@@ -34,9 +39,11 @@ void test_stringcat(CuTest *tc) {
 
     output = stringcat("compsci", "210");
     CuAssertStrEquals(tc, "compsci210", output);
+    free(output);
 
     output = stringcat("The weather in Durham is...", "hot and humid in the summer!");
     CuAssertStrEquals(tc, "The weather in Durham is...hot and humid in the summer!", output);
+    free(output);
 }
 
 /**
